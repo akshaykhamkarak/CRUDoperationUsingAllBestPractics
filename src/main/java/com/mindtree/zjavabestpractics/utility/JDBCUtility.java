@@ -9,7 +9,7 @@ import com.mindtree.zjavabestpractics.exception.ConnectionUtilityException;
 
 public class JDBCUtility {
 
-	private static String URL="jdbc:mysql://localhost:3307/cricket";
+	private static String URL="jdbc:mysql://localhost:3307/BookAuthor";
 	private static String USERNAME="root";
 	private static String PASSWORD="Trishali@1999";
 

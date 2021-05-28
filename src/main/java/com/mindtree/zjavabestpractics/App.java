@@ -2,7 +2,9 @@ package com.mindtree.zjavabestpractics;
 
 import java.util.Scanner;
 
+import com.mindtree.zjavabestpractics.exception.DaoInputException;
 import com.mindtree.zjavabestpractics.exception.DaoOutputException;
+import com.mindtree.zjavabestpractics.exception.DataNotFound;
 import com.mindtree.zjavabestpractics.exception.InpuFormatEcxeption;
 import com.mindtree.zjavabestpractics.exception.InputException;
 import com.mindtree.zjavabestpractics.service.InputInterface;
@@ -21,7 +23,7 @@ public class App
 //		ip=new InputInterfaceImpl();
 //		
 //	}
-    public static void main( String[] args )throws InputException, InpuFormatEcxeption,InpuFormatEcxeption, DaoOutputException
+    public static void main( String[] args )throws InputException, InpuFormatEcxeption, DaoOutputException, DataNotFound
     {
     	boolean condition = false;
     	
@@ -32,20 +34,29 @@ public class App
     		  int choice=InputUtility.getChoice();
     		  switch (choice) {
 			case 1:
+				
+			
 				try {
-				ip.addMethod();
-				}
-				catch (InpuFormatEcxeption e) {
-					System.out.println(e.getMessage());
+					ip.addMethod();
+				} catch (DaoInputException e) {
+					
+					System.err.println(e.getMessage());
 				}
 				break;
-			case 2:
+			case 2:ip.displayAuthorDetails();
+				break;
+			case 3:
+				ip.displayAuthor();
+				break;
+			case 4:
 				Options.exit();
 				condition=true;
 				break;
-			case 3:
-				ip.displayAuthorDetails();
+			case 5:
+				ip.deleteBookByBookId();
 				break;
+			case 6:
+				ip.displyAllRecord();
 			default:
 				System.out.println("You enter wrong choice please enter correct choice..");
 				break;
