@@ -1,6 +1,8 @@
 package com.mindtree.zjavabestpractics.entity;
 
-public class Author {
+
+
+public class Author implements Comparable<Author>{
 	private int id;
 	private String name;
 	private int bookid;
@@ -49,5 +51,13 @@ public class Author {
 		this.bookid = bookid;
 	}
 
-	
+
+	public int compareTo(Author au){  
+		if(bookid==au.bookid)  
+		return 0;  
+		else if(bookid>au.bookid)  
+		return 1;  
+		else  
+		return -1;  
+		}  
 }
