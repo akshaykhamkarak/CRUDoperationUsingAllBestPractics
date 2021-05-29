@@ -2,9 +2,13 @@ package com.mindtree.zjavabestpractics.service.impl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import com.mindtree.zjavabestpractics.dao.AddRecord;
 import com.mindtree.zjavabestpractics.dao.impl.AddRecordImpl;
@@ -61,16 +65,19 @@ public class InputInterfaceImpl implements InputInterface {
 			}
 			Book book = new Book(id, title, price, authors);
 
-			result = addrec.addRecordOfBook(book);
+			try {
+				result = addrec.addRecordOfBook(book);
+			} catch (ConnectionUtilityException e) {
+
+				System.out.println(e.getMessage());
+			}
 
 			if (result == true) {
 				System.out.println("Success..");
 
-			} else
-				System.out.println("Fail to add");
-		}
-		catch (Exception e) {
-			throw new DaoInputException("Input must be check...");
+			}
+		} catch (DaoInputException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -134,8 +141,35 @@ public class InputInterfaceImpl implements InputInterface {
 		}
 	}
 
-	public void displyAllRecord() {
+	public void displyAllRecord() throws DaoOutputException {
 
+		Map<Integer, String>map=new HashMap<Integer, String>();
+		try {
+		map=addrec.getAuthorData();
+		//only print data of author
+		Iterator<Integer>it=map.keySet().iterator();
+		while(it.hasNext())  
+		{  
+		int key=(int)it.next();  
+		System.out.println("Author Id:  "+key+"     name:   "+map.get(key));  
+		}  
+		
+		//sorted with Name
+	      ValueComparator bvc = new ValueComparator(map);
+	        TreeMap<Integer, String> sorted_map = new TreeMap<Integer, String>(bvc);
+	        sorted_map.putAll(map);
+	      System.out.println("=======================================");
+	        Iterator<Integer>it1=sorted_map.keySet().iterator();
+	        while(it1.hasNext()) {
+	        	int key=(int)it1.next();
+	        	System.out.println("sort Author Id:  "+key+"     sort name:   "+map.get(key));
+	        }
+	       System.out.println("results: " + sorted_map);
+		
+		}catch (DaoOutputException e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 
 }

@@ -2,6 +2,7 @@ package com.mindtree.zjavabestpractics.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import com.mindtree.zjavabestpractics.entity.Author;
 import com.mindtree.zjavabestpractics.entity.Book;
@@ -19,6 +20,8 @@ List<Book> displayAuthorDao() throws DaoOutputException;
 List<Author> displayAuthorDetailsDao()throws DaoOutputException;
 
 boolean deleteBookDao(Book book)throws DataNotFound,SQLException;
+
+Map<Integer, String> getAuthorData()throws DaoOutputException ;
 
 
 }

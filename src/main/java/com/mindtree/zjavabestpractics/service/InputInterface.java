@@ -15,7 +15,7 @@ public interface InputInterface {
 
 	void deleteBookByBookId()throws DataNotFound;
 
-	void displyAllRecord();
+	void displyAllRecord() throws DaoOutputException;
 
 
 
